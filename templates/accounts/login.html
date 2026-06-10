@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Вход" %} — Кебзtore{% endblock %}
+
+{% block content %}
+<div class="auth-card">
+  <h1>{% trans "Вход" %}</h1>
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {% if form.non_field_errors %}<div class="field-error">{{ form.non_field_errors }}</div>{% endif %}
+    <label>{% trans "Email" %}{{ form.username }}</label>
+    <label>{% trans "Пароль" %}{{ form.password }}</label>
+    <button type="submit" class="btn">{% trans "Войти" %}</button>
+  </form>
+  <p><a href="{% url 'accounts:password_reset' %}">{% trans "Забыли пароль?" %}</a></p>
+  <p>{% trans "Нет аккаунта?" %} <a href="{% url 'accounts:register' %}">{% trans "Регистрация" %}</a></p>
+</div>
+{% endblock %}

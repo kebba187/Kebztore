@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% if is_edit %}{% trans "Редактирование товара" %}{% else %}{% trans "Новый товар" %}{% endif %} — Кебзtore{% endblock %}
+
+{% block content %}
+<h1 class="dash-title">{% trans "Панель управления" %}</h1>
+{% include "dashboard/_tabs.html" %}
+
+<div class="product-form-card">
+  <h2 class="form-card-title">{% if is_edit %}{% trans "Редактирование товара" %}{% else %}{% trans "Создать товар" %}{% endif %}</h2>
+
+  {# Make a rejected save obvious (otherwise users think it saved). #}
+  {% if form.errors %}
+    <div class="form-banner danger">
+      {% trans "Товар не сохранён — проверьте поля ниже." %}
+      {% for field in form %}{% for e in field.errors %}<div>• {{ field.label }}: {{ e }}</div>{% endfor %}{% endfor %}
+      {% for e in form.non_field_errors %}<div>• {{ e }}</div>{% endfor %}
+    </div>
+  {% endif %}
+
+  {# enctype required because the form uploads an image (request.FILES). #}
+  <form method="post" enctype="multipart/form-data" class="dash-form" novalidate>
+    {% csrf_token %}
+    {% for field in form %}
+      {# row id lets the toggle script show/hide team & league by category #}
+      <label class="form-row" id="row-{{ field.name }}">
+        <span>{{ field.label }}{% if field.field.required %} *{% endif %}</span>
+        {{ field }}
+      </label>
+    {% endfor %}
+    <button type="submit" class="btn btn-block">
+      ⊕ {% if is_edit %}{% trans "Сохранить" %}{% else %}{% trans "Создать товар" %}{% endif %}
+    </button>
+  </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Club jerseys -> show team + league; Country jerseys -> show the country fields.
+(function () {
+  var cat = document.getElementById("id_category");
+  var clubRows = ["row-team_name", "row-league_name"].map(function (id) { return document.getElementById(id); });
+  var countryRows = ["row-country_ru", "row-country_en"].map(function (id) { return document.getElementById(id); });
+  function show(rows, on) { rows.forEach(function (r) { if (r) r.style.display = on ? "" : "none"; }); }
+  function toggle() {
+    var isClub = cat && cat.value === "club";
+    show(clubRows, isClub);
+    show(countryRows, !isClub);
+  }
+  if (cat) { cat.addEventListener("change", toggle); toggle(); }
+})();
+</script>
+{% endblock %}

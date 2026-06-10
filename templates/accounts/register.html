@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Регистрация" %} — Кебзtore{% endblock %}
+
+{% block content %}
+<div class="auth-card">
+  <h1>{% trans "Регистрация" %}</h1>
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {% for field in form %}
+      <label>{{ field.label }}{{ field }}</label>
+      {% for e in field.errors %}<span class="field-error">{{ e }}</span>{% endfor %}
+    {% endfor %}
+    <p class="muted">{% trans "Регистрируясь, вы соглашаетесь с обработкой персональных данных согласно 152-ФЗ." %}</p>
+    <button type="submit" class="btn">{% trans "Создать аккаунт" %}</button>
+  </form>
+</div>
+{% endblock %}

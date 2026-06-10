@@ -1,0 +1,16 @@
+{% load i18n %}
+{# Shared dashboard tab bar. `active_tab` is set per view. #}
+<div class="dash-tabs">
+  <a href="{% url 'dashboard:product_create' %}" class="dash-tab {% if active_tab == 'create' %}active{% endif %}">
+    ⊕ {% trans "Создать товар" %}
+  </a>
+  <a href="{% url 'dashboard:product_list' %}" class="dash-tab {% if active_tab == 'products' %}active{% endif %}">
+    ▤ {% trans "Товары" %}
+  </a>
+  <a href="{% url 'dashboard:order_list' %}" class="dash-tab {% if active_tab == 'orders' %}active{% endif %}">
+    ▦ {% trans "Заказы" %}
+  </a>
+  <a href="{% url 'dashboard:analytics' %}" class="dash-tab {% if active_tab == 'analytics' %}active{% endif %}">
+    ▣ {% trans "Аналитика" %}
+  </a>
+</div>

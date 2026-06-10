@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load i18n humanize %}
+{% block title %}Кебзtore — {% trans "Каталог джерси" %}{% endblock %}
+
+{% block content %}
+<h1>{% if category_label %}{{ category_label }}{% else %}{% trans "Футбольные джерси" %}{% endif %}</h1>
+
+<div class="catalog-layout">
+  {# ── Filters (GET form; all values parameterized via the ORM) ──────────── #}
+  <aside class="filters">
+    <form method="get">
+      <label>{% trans "Категория" %}
+        <select name="category">
+          <option value="">{% trans "Все" %}</option>
+          {% for val, label in categories %}
+            <option value="{{ val }}" {% if selected.category == val %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <label>{% trans "Лига" %}
+        <select name="league">
+          <option value="">{% trans "Все" %}</option>
+          {% for l in leagues %}
+            <option value="{{ l.slug }}" {% if selected.league == l.slug %}selected{% endif %}>{{ l.name }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <label>{% trans "Команда" %}
+        <select name="team">
+          <option value="">{% trans "Все" %}</option>
+          {% for t in teams %}
+            <option value="{{ t.slug }}" {% if selected.team == t.slug %}selected{% endif %}>{{ t.name }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <label>{% trans "Размер" %}
+        <select name="size">
+          <option value="">{% trans "Любой" %}</option>
+          {% for val, label in sizes %}
+            <option value="{{ val }}" {% if selected.size == val %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <div class="price-range">
+        <input type="number" name="price_min" min="0" placeholder="{% trans 'Цена от' %}" value="{{ selected.price_min|default:'' }}">
+        <input type="number" name="price_max" min="0" placeholder="{% trans 'до' %}" value="{{ selected.price_max|default:'' }}">
+      </div>
+      <button type="submit" class="btn">{% trans "Применить" %}</button>
+    </form>
+  </aside>
+
+  {# ── Product grid ──────────────────────────────────────────────────────── #}
+  <section class="product-grid">
+    {% for product in page_obj %}
+      <article class="card">
+        <a href="{{ product.get_absolute_url }}">
+          {% if product.main_image %}
+            <img src="{{ product.main_image }}" alt="{{ product.title }}">
+          {% else %}<div class="noimg">{% trans "Нет фото" %}</div>{% endif %}
+          <h3>{{ product.title }}</h3>
+        </a>
+        <p class="muted">{% if product.origin %}{{ product.origin }} · {% endif %}{{ product.season }} · {{ product.size }}</p>
+        <p class="price">{{ product.price|floatformat:0|intcomma }} ₽</p>
+        {% if product.in_stock %}
+          <button class="btn add-to-cart" data-id="{{ product.id }}">{% trans "В корзину" %}</button>
+        {% else %}
+          <span class="muted">{% trans "Нет в наличии" %}</span>
+        {% endif %}
+      </article>
+    {% empty %}
+      <p>{% trans "Ничего не найдено." %}</p>
+    {% endfor %}
+  </section>
+</div>
+
+{# ── Pagination (preserves active filters) ─────────────────────────────── #}
+{% if page_obj.has_other_pages %}
+<nav class="pagination">
+  {% if page_obj.has_previous %}
+    <a href="?{{ querystring }}&page={{ page_obj.previous_page_number }}">←</a>
+  {% endif %}
+  <span>{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+  {% if page_obj.has_next %}
+    <a href="?{{ querystring }}&page={{ page_obj.next_page_number }}">→</a>
+  {% endif %}
+</nav>
+{% endif %}
+{% endblock %}

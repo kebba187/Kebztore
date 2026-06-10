@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load i18n humanize static %}
+{% block title %}{% trans "Панель управления" %} — Кебзtore{% endblock %}
+
+{% block content %}
+<h1 class="dash-title">{% trans "Панель управления" %}</h1>
+{% include "dashboard/_tabs.html" %}
+
+{# ── Stat cards ─────────────────────────────────────────────────────────── #}
+<div class="stat-grid">
+  <div class="stat-card">
+    <span class="stat-label">{% trans "Пользователи" %}</span>
+    <span class="stat-value">{{ stats.users }}</span>
+    <svg class="stat-icon" viewBox="0 0 24 24"><path d="M12 12a5 5 0 100-10 5 5 0 000 10zm0 2c-5 0-9 2.5-9 6v2h18v-2c0-3.5-4-6-9-6z"/></svg>
+  </div>
+  <div class="stat-card">
+    <span class="stat-label">{% trans "Товары" %}</span>
+    <span class="stat-value">{{ stats.products }}</span>
+    <svg class="stat-icon" viewBox="0 0 24 24"><path d="M12 2l9 5v10l-9 5-9-5V7l9-5zm0 2.3L5 8v8l7 3.8L19 16V8l-7-3.7z"/></svg>
+  </div>
+  <div class="stat-card">
+    <span class="stat-label">{% trans "Продажи" %}</span>
+    <span class="stat-value">{{ stats.sales }}</span>
+    <svg class="stat-icon" viewBox="0 0 24 24"><path d="M7 4h-2l-1 2H2v2h2l3 9h11l3-7H8.4l-.5-2H21V6H6.5L7 4zm2 14a2 2 0 100 4 2 2 0 000-4zm9 0a2 2 0 100 4 2 2 0 000-4z"/></svg>
+  </div>
+  <div class="stat-card">
+    <span class="stat-label">{% trans "Выручка" %}</span>
+    <span class="stat-value">{{ stats.revenue|floatformat:0|intcomma }} ₽</span>
+    <svg class="stat-icon" viewBox="0 0 24 24"><path d="M13 2v2.1a5 5 0 014 4.9h-2a3 3 0 00-3-3H9.5a1.5 1.5 0 000 3H13a4 4 0 010 8v2h-2v-2.1a5 5 0 01-4-4.9h2a3 3 0 003 3h2.5a1.5 1.5 0 000-3H11a4 4 0 010-8V2h2z"/></svg>
+  </div>
+</div>
+
+{# ── Sales / Revenue chart (dependency-free canvas) ─────────────────────── #}
+<div class="chart-panel">
+  <canvas id="sales-chart" height="240"></canvas>
+  <div class="chart-legend">
+    <span><i class="dot sales"></i>{% trans "Продажи" %}</span>
+    <span><i class="dot revenue"></i>{% trans "Выручка" %}</span>
+  </div>
+</div>
+
+{{ chart|json_script:"chart-data" }}
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/dashboard.js' %}"></script>
+{% endblock %}

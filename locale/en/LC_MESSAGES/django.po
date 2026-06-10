@@ -1,0 +1,577 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+# ── base / navigation ───────────────────────────────────────────────────────
+msgid "футбольные джерси"
+msgstr "football jerseys"
+
+msgid "Главная"
+msgstr "Home"
+
+msgid "Каталог"
+msgstr "Catalog"
+
+msgid "Корзина"
+msgstr "Cart"
+
+msgid "Панель"
+msgstr "Dashboard"
+
+msgid "Профиль"
+msgstr "Profile"
+
+msgid "Выход"
+msgstr "Log out"
+
+msgid "Вход"
+msgstr "Log in"
+
+msgid "Персональные данные"
+msgstr "Personal Data"
+
+msgid "Публичная оферта"
+msgstr "Public Offer"
+
+msgid "Все права защищены."
+msgstr "All rights reserved."
+
+msgid "Мы используем файлы cookie. Технические — необходимы для работы сайта. Аналитические и рекламные — только с вашего согласия."
+msgstr "We use cookies. Technical cookies are required for the site to work. Analytical and advertising cookies are used only with your consent."
+
+msgid "Подробнее"
+msgstr "Details"
+
+msgid "Технические"
+msgstr "Technical"
+
+msgid "Аналитические"
+msgstr "Analytical"
+
+msgid "Рекламные"
+msgstr "Advertising"
+
+msgid "Принять выбранные"
+msgstr "Accept selected"
+
+msgid "Принять все"
+msgstr "Accept all"
+
+# ── personal data page ──────────────────────────────────────────────────────
+msgid "Обработка персональных данных"
+msgstr "Personal data processing"
+
+msgid "В соответствии с Федеральным законом № 152-ФЗ «О персональных данных»."
+msgstr "In accordance with Federal Law No. 152-FZ \"On Personal Data\"."
+
+msgid "Какие данные мы собираем"
+msgstr "What data we collect"
+
+msgid "ФИО, email и телефон — для связи и оформления заказа."
+msgstr "Full name, email and phone — for contact and order processing."
+
+msgid "Адрес доставки — для отправки товара."
+msgstr "Delivery address — to ship the order."
+
+msgid "Технические данные (cookie сессии) — для работы корзины и авторизации."
+msgstr "Technical data (session cookies) — for the cart and authentication."
+
+msgid "Зачем мы их собираем"
+msgstr "Why we collect it"
+
+msgid "Исключительно для исполнения договора купли-продажи, доставки заказа и поддержки клиентов. Мы не передаём данные третьим лицам, кроме служб доставки и платёжного провайдера (ЮKassa) в объёме, необходимом для исполнения заказа."
+msgstr "Solely to fulfil the sales contract, deliver the order and support customers. We do not share data with third parties, except delivery services and the payment provider (YooKassa) to the extent necessary to fulfil the order."
+
+msgid "Где и как хранятся данные"
+msgstr "Where and how data is stored"
+
+msgid "Персональные данные граждан РФ хранятся и обрабатываются на серверах, расположенных на территории Российской Федерации (например, Yandex.Cloud / SberCloud / Timeweb). Доступ к данным ограничен, передача защищена по протоколу HTTPS. Данные платёжных карт мы не храним — оплата проходит на стороне ЮKassa."
+msgstr "Personal data of Russian citizens is stored and processed on servers located in the Russian Federation (e.g. Yandex.Cloud / SberCloud / Timeweb). Access is restricted and transfers are protected via HTTPS. We do not store payment card data — payment is handled on YooKassa's side."
+
+msgid "Категории cookie"
+msgstr "Cookie categories"
+
+msgid "необходимы для работы сайта (сессия, корзина). Всегда включены."
+msgstr "required for the site to work (session, cart). Always on."
+
+msgid "помогают понять, как используется сайт. Только с вашего согласия."
+msgstr "help us understand how the site is used. Only with your consent."
+
+msgid "используются для маркетинга. Только с вашего согласия."
+msgstr "used for marketing. Only with your consent."
+
+msgid "Ваши права по 152-ФЗ"
+msgstr "Your rights under 152-FZ"
+
+msgid "получить информацию об обработке ваших данных;"
+msgstr "obtain information about the processing of your data;"
+
+msgid "потребовать уточнения, блокировки или удаления данных;"
+msgstr "request correction, blocking or deletion of data;"
+
+msgid "отозвать согласие на обработку."
+msgstr "withdraw consent to processing."
+
+msgid "Запросы направляйте на"
+msgstr "Send requests to"
+
+# ── auth ────────────────────────────────────────────────────────────────────
+msgid "Email"
+msgstr "Email"
+
+msgid "Пароль"
+msgstr "Password"
+
+msgid "Войти"
+msgstr "Log in"
+
+msgid "Забыли пароль?"
+msgstr "Forgot your password?"
+
+msgid "Нет аккаунта?"
+msgstr "No account?"
+
+msgid "Регистрация"
+msgstr "Sign up"
+
+msgid "Пароль изменён"
+msgstr "Password changed"
+
+msgid "Регистрируясь, вы соглашаетесь с обработкой персональных данных согласно 152-ФЗ."
+msgstr "By signing up, you agree to the processing of personal data under 152-FZ."
+
+msgid "Создать аккаунт"
+msgstr "Create account"
+
+msgid "Сброс пароля"
+msgstr "Password reset"
+
+msgid "Отправить ссылку"
+msgstr "Send link"
+
+msgid "Новый пароль"
+msgstr "New password"
+
+msgid "Сохранить"
+msgstr "Save"
+
+msgid "Ссылка недействительна или устарела."
+msgstr "The link is invalid or has expired."
+
+msgid "Письмо отправлено"
+msgstr "Email sent"
+
+msgid "Если такой email зарегистрирован, мы отправили ссылку для сброса пароля."
+msgstr "If that email is registered, we've sent a password reset link."
+
+msgid "Повтор пароля"
+msgstr "Repeat password"
+
+msgid "Пользователь с таким email уже существует."
+msgstr "A user with this email already exists."
+
+msgid "Пароли не совпадают."
+msgstr "Passwords do not match."
+
+# ── profile / orders ────────────────────────────────────────────────────────
+msgid "История заказов"
+msgstr "Order history"
+
+msgid "Дата"
+msgstr "Date"
+
+msgid "Статус"
+msgstr "Status"
+
+msgid "Сумма"
+msgstr "Total"
+
+msgid "Доставка / трек-номер"
+msgstr "Delivery / tracking №"
+
+msgid "отправлен"
+msgstr "shipped"
+
+msgid "У вас пока нет заказов."
+msgstr "You have no orders yet."
+
+# ── catalog ─────────────────────────────────────────────────────────────────
+msgid "Каталог джерси"
+msgstr "Jersey catalog"
+
+msgid "Футбольные джерси"
+msgstr "Football jerseys"
+
+msgid "Категория"
+msgstr "Category"
+
+msgid "Все"
+msgstr "All"
+
+msgid "Лига"
+msgstr "League"
+
+msgid "Команда"
+msgstr "Team"
+
+msgid "Размер"
+msgstr "Size"
+
+msgid "Любой"
+msgstr "Any"
+
+msgid "Применить"
+msgstr "Apply"
+
+msgid "Нет фото"
+msgstr "No photo"
+
+msgid "В корзину"
+msgstr "Add to cart"
+
+msgid "Нет в наличии"
+msgstr "Out of stock"
+
+msgid "Ничего не найдено."
+msgstr "Nothing found."
+
+msgid "Выберите категорию"
+msgstr "Choose a category"
+
+msgid "Оригинальные джерси клубов и национальных сборных"
+msgstr "Original club and national team jerseys"
+
+msgid "Популярное"
+msgstr "Featured"
+
+msgid "Товары скоро появятся."
+msgstr "Products coming soon."
+
+msgid "Добавить в корзину"
+msgstr "Add to cart"
+
+msgid "Описание"
+msgstr "Description"
+
+msgid "Осталось %(counter)s шт."
+msgid_plural "Осталось %(counter)s шт."
+msgstr[0] "%(counter)s left in stock"
+msgstr[1] "%(counter)s left in stock"
+
+# ── cart ────────────────────────────────────────────────────────────────────
+msgid "Корзина пуста."
+msgstr "Your cart is empty."
+
+msgid "В каталог"
+msgstr "Go to catalog"
+
+msgid "Товар"
+msgstr "Product"
+
+msgid "Цена"
+msgstr "Price"
+
+msgid "Кол-во"
+msgstr "Qty"
+
+msgid "Удалить"
+msgstr "Remove"
+
+msgid "Товаров на сумму"
+msgstr "Items subtotal"
+
+msgid "Ориентировочная доставка"
+msgstr "Estimated delivery"
+
+msgid "бесплатно"
+msgstr "free"
+
+msgid "Точная стоимость доставки рассчитывается на оформлении заказа."
+msgstr "The exact delivery cost is calculated at checkout."
+
+msgid "Оформить заказ"
+msgstr "Place order"
+
+# ── checkout / order ────────────────────────────────────────────────────────
+msgid "Оформление заказа"
+msgstr "Checkout"
+
+msgid "Получатель"
+msgstr "Recipient"
+
+msgid "Адрес доставки (РФ)"
+msgstr "Delivery address (Russia)"
+
+msgid "Способ доставки"
+msgstr "Delivery method"
+
+msgid "Перейти к оплате"
+msgstr "Proceed to payment"
+
+msgid "Ваш заказ"
+msgstr "Your order"
+
+msgid "Итого товаров"
+msgstr "Items total"
+
+msgid "Оплата: карты Мир, SberPay, СБП (QR), YooMoney через ЮKassa."
+msgstr "Payment: Mir cards, SberPay, SBP (QR), YooMoney via YooKassa."
+
+msgid "Заказ"
+msgstr "Order"
+
+msgid "Товары"
+msgstr "Products"
+
+msgid "Доставка"
+msgstr "Delivery"
+
+msgid "Итого"
+msgstr "Total"
+
+msgid "ул."
+msgstr "st."
+
+msgid "д."
+msgstr "bld."
+
+msgid "кв."
+msgstr "apt."
+
+msgid "Трек-номер"
+msgstr "Tracking №"
+
+msgid "Оплата"
+msgstr "Payment"
+
+msgid "Спасибо за заказ!"
+msgstr "Thank you for your order!"
+
+msgid "Статус оплаты обновится автоматически после подтверждения банком."
+msgstr "The payment status will update automatically after the bank confirms it."
+
+msgid "Детали заказа"
+msgstr "Order details"
+
+msgid "Заказ обрабатывается."
+msgstr "Your order is being processed."
+
+msgid "Вернуться в каталог"
+msgstr "Back to catalog"
+
+msgid "Заказ №%(id)s принят."
+msgstr "Order №%(id)s accepted."
+
+msgid "Подробнее заказ"
+msgstr "Order details"
+
+# ── dashboard ───────────────────────────────────────────────────────────────
+msgid "Панель управления"
+msgstr "Dashboard"
+
+msgid "Пользователи"
+msgstr "Users"
+
+msgid "Продажи"
+msgstr "Sales"
+
+msgid "Выручка"
+msgstr "Revenue"
+
+msgid "Заказы"
+msgstr "Orders"
+
+msgid "Покупатель"
+msgstr "Customer"
+
+msgid "Управление"
+msgstr "Manage"
+
+msgid "Заказов нет."
+msgstr "No orders."
+
+msgid "Покупатель и адрес"
+msgstr "Customer & address"
+
+msgid "Статус и доставка"
+msgstr "Status & delivery"
+
+msgid "При выборе «Отправлен» покупателю придёт письмо с трек-номером."
+msgstr "When set to \"Shipped\", the customer receives an email with the tracking number."
+
+msgid "Редактирование товара"
+msgstr "Edit product"
+
+msgid "Новый товар"
+msgstr "New product"
+
+msgid "Создать товар"
+msgstr "Create product"
+
+msgid "Товар не сохранён — проверьте поля ниже."
+msgstr "Product not saved — check the fields below."
+
+msgid "Название"
+msgstr "Name"
+
+msgid "Остаток"
+msgstr "Stock"
+
+msgid "Активен"
+msgstr "Active"
+
+msgid "Изменить"
+msgstr "Edit"
+
+msgid "Удалить товар?"
+msgstr "Delete this product?"
+
+msgid "Товаров пока нет."
+msgstr "No products yet."
+
+msgid "Создать"
+msgstr "Create"
+
+msgid "Аналитика"
+msgstr "Analytics"
+
+# ── status / category choices ───────────────────────────────────────────────
+msgid "Ожидает оплаты"
+msgstr "Pending payment"
+
+msgid "Оплачен"
+msgstr "Paid"
+
+msgid "Отправлен"
+msgstr "Shipped"
+
+msgid "Доставлен"
+msgstr "Delivered"
+
+msgid "Отменён"
+msgstr "Cancelled"
+
+msgid "Клубные"
+msgstr "Clubs"
+
+msgid "Сборные"
+msgstr "National teams"
+
+msgid "Клубные джерси"
+msgstr "Club jerseys"
+
+msgid "Джерси футбольных клубов"
+msgstr "Football club jerseys"
+
+msgid "Джерси национальных сборных"
+msgstr "National team jerseys"
+
+# ── forms: labels, placeholders, validation ─────────────────────────────────
+msgid "ФИО"
+msgstr "Full name"
+
+msgid "Телефон"
+msgstr "Phone"
+
+msgid "Регион"
+msgstr "Region"
+
+msgid "Город"
+msgstr "City"
+
+msgid "Улица"
+msgstr "Street"
+
+msgid "Дом"
+msgstr "Building"
+
+msgid "Квартира"
+msgstr "Apartment"
+
+msgid "Индекс"
+msgstr "Postal code"
+
+msgid "Сезон"
+msgstr "Season"
+
+msgid "Изображение"
+msgstr "Image"
+
+msgid "Команда (клуб)"
+msgstr "Team (club)"
+
+msgid "например, Зенит"
+msgstr "e.g. Zenit"
+
+msgid "например, РПЛ"
+msgstr "e.g. RPL"
+
+msgid "например, Россия"
+msgstr "e.g. Russia"
+
+msgid "Лига (RU)"
+msgstr "League (RU)"
+
+msgid "Лига (EN)"
+msgstr "League (EN)"
+
+msgid "Команда (RU)"
+msgstr "Team (RU)"
+
+msgid "Команда (EN)"
+msgstr "Team (EN)"
+
+msgid "Название (RU)"
+msgstr "Name (RU)"
+
+msgid "Название (EN)"
+msgstr "Name (EN)"
+
+msgid "Сборная/страна (RU)"
+msgstr "National team/country (RU)"
+
+msgid "Сборная/страна (EN)"
+msgstr "National team/country (EN)"
+
+msgid "Описание (RU)"
+msgstr "Description (RU)"
+
+msgid "Описание (EN)"
+msgstr "Description (EN)"
+
+msgid "Цена, ₽"
+msgstr "Price, ₽"
+
+msgid "Клубная джерси или джерси сборной"
+msgstr "Club jersey or national team jersey"
+
+msgid "Цена должна быть больше нуля."
+msgstr "Price must be greater than zero."
+
+msgid "Укажите команду для клубной джерси."
+msgstr "Specify a team for a club jersey."
+
+msgid "Укажите лигу для клубной джерси."
+msgstr "Specify a league for a club jersey."
+
+msgid "Укажите сборную/страну."
+msgstr "Specify the national team / country."
+
+msgid "Укажите трек-номер при отметке «Отправлен»."
+msgstr "Provide a tracking number when marking as \"Shipped\"."
+
+msgid "Введите корректный номер телефона."
+msgstr "Enter a valid phone number."
+
+msgid "Почтовый индекс РФ состоит из 6 цифр."
+msgstr "A Russian postal code has 6 digits."
+
+# ── view messages ───────────────────────────────────────────────────────────
+msgid "Корзина пуста."
+msgstr "Your cart is empty."
+
+msgid "Заказ создан, но платёж пока недоступен."
+msgstr "Order created, but payment is not available yet."

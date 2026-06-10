@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load i18n humanize %}
+{% block title %}{% trans "Товары" %} — Кебзtore{% endblock %}
+
+{% block content %}
+<h1 class="dash-title">{% trans "Панель управления" %}</h1>
+{% include "dashboard/_tabs.html" %}
+
+<div class="chart-panel">
+  <table class="cart-table">
+    <thead><tr>
+      <th>{% trans "Название" %}</th><th>{% trans "Команда" %}</th>
+      <th>{% trans "Размер" %}</th><th>{% trans "Цена" %}</th>
+      <th>{% trans "Остаток" %}</th><th>{% trans "Активен" %}</th><th></th>
+    </tr></thead>
+    <tbody>
+    {% for p in products %}
+      <tr>
+        <td>{{ p.title_ru }}</td>
+        <td>{{ p.origin|default:"—" }} <span class="muted">({{ p.get_category_display }})</span></td>
+        <td>{{ p.size }}</td>
+        <td>{{ p.price|floatformat:0|intcomma }} ₽</td>
+        <td>{{ p.stock }}</td>
+        <td>{% if p.is_active %}✓{% else %}—{% endif %}</td>
+        <td class="row-actions">
+          <a href="{% url 'dashboard:product_edit' p.id %}">{% trans "Изменить" %}</a>
+          <form action="{% url 'dashboard:product_delete' p.id %}" method="post" class="inline"
+                onsubmit="return confirm('{% trans "Удалить товар?" %}');">
+            {% csrf_token %}<button type="submit" class="linkbtn danger">{% trans "Удалить" %}</button>
+          </form>
+        </td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="7">{% trans "Товаров пока нет." %}
+        <a href="{% url 'dashboard:product_create' %}">{% trans "Создать" %}</a></td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

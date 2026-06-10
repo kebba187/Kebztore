@@ -1,0 +1,45 @@
+{% load humanize %}<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head>
+<body style="margin:0;background:#0a1512;font-family:Arial,Helvetica,sans-serif;color:#e7ecea;">
+  <div style="max-width:560px;margin:0 auto;padding:24px;">
+    <h1 style="color:#34d399;margin:0 0 4px;font-size:22px;">Кеб<span style="color:#34d399;">z</span>tore</h1>
+    <p style="color:#94a39d;margin:0 0 20px;">Подтверждение заказа</p>
+
+    <p>Здравствуйте, {{ order.full_name }}!</p>
+    <p>Ваш заказ <strong>№{{ order.id }}</strong> оплачен. Спасибо за покупку!</p>
+
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;">
+      <thead>
+        <tr style="color:#94a39d;text-align:left;font-size:13px;">
+          <th style="padding:8px;border-bottom:1px solid #233029;">Товар</th>
+          <th style="padding:8px;border-bottom:1px solid #233029;">Кол-во</th>
+          <th style="padding:8px;border-bottom:1px solid #233029;text-align:right;">Сумма</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in items %}
+        <tr>
+          <td style="padding:8px;border-bottom:1px solid #233029;">{{ item.title }} ({{ item.size }})</td>
+          <td style="padding:8px;border-bottom:1px solid #233029;">{{ item.quantity }}</td>
+          <td style="padding:8px;border-bottom:1px solid #233029;text-align:right;">{{ item.line_total|floatformat:0|intcomma }} ₽</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <p style="margin:4px 0;">Товары: {{ order.items_total|floatformat:0|intcomma }} ₽</p>
+    {% if order.shipping_method %}<p style="margin:4px 0;">Доставка ({{ order.shipping_method.name_ru }}): {{ order.shipping_cost|floatformat:0|intcomma }} ₽</p>{% endif %}
+    <p style="margin:8px 0;font-size:18px;color:#34d399;"><strong>Итого: {{ order.grand_total|floatformat:0|intcomma }} ₽</strong></p>
+
+    <h3 style="color:#e7ecea;margin:20px 0 6px;">Адрес доставки</h3>
+    <p style="margin:0;color:#cdd6d2;">
+      {{ order.postal_code }}, {{ order.region }}, г. {{ order.city }},<br>
+      ул. {{ order.street }}, д. {{ order.building }}{% if order.apartment %}, кв. {{ order.apartment }}{% endif %}
+    </p>
+    {% if order.tracking_number %}<p style="margin:12px 0;">Трек-номер: <strong>{{ order.tracking_number }}</strong></p>{% endif %}
+
+    <p style="color:#94a39d;font-size:13px;margin-top:24px;">С уважением, команда Кебзtore</p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load i18n humanize %}
+{% block title %}{{ product.title }} — Кебзtore{% endblock %}
+
+{% block content %}
+<div class="product-detail">
+  <div class="gallery">
+    {% for img in product.images.all %}
+      <img src="{{ img.image.url }}" alt="{{ img.alt|default:product.title }}">
+    {% empty %}
+      <div class="noimg">{% trans "Нет фото" %}</div>
+    {% endfor %}
+  </div>
+
+  <div class="info">
+    <h1>{{ product.title }}</h1>
+    <p class="muted">{% if product.origin %}{{ product.origin }} · {% endif %}{% if product.league %}{{ product.league.name }} · {% endif %}{{ product.season }}</p>
+    <p><strong>{% trans "Размер" %}:</strong> {{ product.size }}</p>
+    <p class="price">{{ product.price|floatformat:0|intcomma }} ₽</p>
+
+    {% if product.in_stock %}
+      <div class="buy-row">
+        <input type="number" id="qty" value="1" min="1" max="{{ product.stock }}">
+        <button class="btn add-to-cart" data-id="{{ product.id }}" data-qty-input="qty">
+          {% trans "Добавить в корзину" %}
+        </button>
+      </div>
+      <p class="muted">{% blocktrans count counter=product.stock %}Осталось {{ counter }} шт.{% plural %}Осталось {{ counter }} шт.{% endblocktrans %}</p>
+    {% else %}
+      <p class="muted">{% trans "Нет в наличии" %}</p>
+    {% endif %}
+
+    <div class="description">
+      <h2>{% trans "Описание" %}</h2>
+      <p>{{ product.description|linebreaksbr }}</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

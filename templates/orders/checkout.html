@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load i18n humanize %}
+{% block title %}{% trans "Оформление заказа" %} — Кебзtore{% endblock %}
+
+{% block content %}
+<h1>{% trans "Оформление заказа" %}</h1>
+
+<div class="checkout-layout">
+  <form method="post" class="checkout-form" novalidate>
+    {% csrf_token %}{# CSRF token required for all POST forms #}
+
+    <fieldset>
+      <legend>{% trans "Получатель" %}</legend>
+      {% for field in form %}
+        {% if field.name in 'full_name,email,phone' %}
+          <label>{{ field.label }}{% if field.field.required %} *{% endif %}
+            {{ field }}
+          </label>
+          {% for e in field.errors %}<span class="field-error">{{ e }}</span>{% endfor %}
+        {% endif %}
+      {% endfor %}
+    </fieldset>
+
+    <fieldset>
+      <legend>{% trans "Адрес доставки (РФ)" %}</legend>
+      {% for field in form %}
+        {% if field.name in 'region,city,street,building,apartment,postal_code' %}
+          <label>{{ field.label }}{% if field.field.required %} *{% endif %}
+            {{ field }}
+          </label>
+          {% for e in field.errors %}<span class="field-error">{{ e }}</span>{% endfor %}
+        {% endif %}
+      {% endfor %}
+    </fieldset>
+
+    <fieldset>
+      <legend>{% trans "Способ доставки" %}</legend>
+      {{ form.shipping_method }}
+      {% for e in form.shipping_method.errors %}<span class="field-error">{{ e }}</span>{% endfor %}
+    </fieldset>
+
+    <button type="submit" class="btn">{% trans "Перейти к оплате" %}</button>
+  </form>
+
+  <aside class="order-summary">
+    <h2>{% trans "Ваш заказ" %}</h2>
+    <ul>
+      {% for item in cart %}
+        <li>{{ item.product.title }} × {{ item.quantity }} — {{ item.line_total|floatformat:0|intcomma }} ₽</li>
+      {% endfor %}
+    </ul>
+    <p><strong>{% trans "Итого товаров" %}: {{ cart.subtotal|floatformat:0|intcomma }} ₽</strong></p>
+    <p class="muted">{% trans "Оплата: карты Мир, SberPay, СБП (QR), YooMoney через ЮKassa." %}</p>
+  </aside>
+</div>
+{% endblock %}

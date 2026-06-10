@@ -1,0 +1,9 @@
+# Кебзtore — Python dependencies
+Django==5.0.6
+psycopg2-binary==2.9.9      # PostgreSQL driver (Russian hosting: Yandex.Cloud / SberCloud / Timeweb)
+python-dotenv==1.2.2        # load secrets from .env (never commit real .env)
+Pillow==12.2.0             # product image handling (ImageField); 10.x has no Python 3.14 wheels
+yookassa==3.0.0            # YooKassa (ЮKassa) SDK — Mir, SberPay, SBP/FPS QR, YooMoney
+gunicorn==22.0.0          # WSGI server for production on Russian hosts (Linux)
+whitenoise==6.12.0        # static file serving in production
+sentry-sdk==2.62.0        # error monitoring (opt-in via SENTRY_DSN)

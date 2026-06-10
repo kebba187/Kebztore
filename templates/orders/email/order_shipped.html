@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head>
+<body style="margin:0;background:#0a1512;font-family:Arial,Helvetica,sans-serif;color:#e7ecea;">
+  <div style="max-width:560px;margin:0 auto;padding:24px;">
+    <h1 style="color:#34d399;margin:0 0 4px;font-size:22px;">Кеб<span style="color:#34d399;">z</span>tore</h1>
+    <p style="color:#94a39d;margin:0 0 20px;">Заказ отправлен</p>
+
+    <p>Здравствуйте, {{ order.full_name }}!</p>
+    <p>Ваш заказ <strong>№{{ order.id }}</strong> отправлен и уже в пути.</p>
+
+    {% if order.shipping_method %}
+    <p style="margin:6px 0;">Служба доставки: <strong>{{ order.shipping_method.name_ru }}</strong>
+       (срок {{ order.shipping_method.eta_label }}).</p>
+    {% endif %}
+    {% if order.tracking_number %}
+    <p style="margin:14px 0;padding:12px 16px;background:#16221e;border:1px solid #233029;border-radius:8px;">
+      Трек-номер: <strong style="color:#34d399;font-size:18px;">{{ order.tracking_number }}</strong>
+    </p>
+    {% endif %}
+
+    <h3 style="color:#e7ecea;margin:20px 0 6px;">Адрес доставки</h3>
+    <p style="margin:0;color:#cdd6d2;">
+      {{ order.postal_code }}, {{ order.region }}, г. {{ order.city }},<br>
+      ул. {{ order.street }}, д. {{ order.building }}{% if order.apartment %}, кв. {{ order.apartment }}{% endif %}
+    </p>
+
+    <p style="color:#94a39d;font-size:13px;margin-top:24px;">Спасибо за покупку! Команда Кебзtore</p>
+  </div>
+</body>
+</html>

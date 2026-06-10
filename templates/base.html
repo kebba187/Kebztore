@@ -1,0 +1,77 @@
+{% load i18n humanize static %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Кебзtore — {% trans "футбольные джерси" %}{% endblock %}</title>
+  {# CSRF token exposed to JS for fetch() POSTs (cart, consent). #}
+  <meta name="csrf-token" content="{{ csrf_token }}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-row">
+    <a class="logo" href="{% url 'catalog:home' %}">Кеб<span>z</span>tore</a>
+    <nav class="main-nav">
+      <a href="{% url 'catalog:home' %}">{% trans "Главная" %}</a>
+      <a href="{% url 'catalog:product_list' %}">{% trans "Каталог" %}</a>
+      <a href="{% url 'cart:detail' %}">{% trans "Корзина" %} (<span id="cart-count">{{ cart|length }}</span>)</a>
+      {% if user.is_staff %}
+        <a href="{% url 'dashboard:analytics' %}" class="nav-dash">{% trans "Панель" %}</a>
+      {% endif %}
+      {% if user.is_authenticated %}
+        <a href="{% url 'accounts:profile' %}">{% trans "Профиль" %}</a>
+        <form action="{% url 'accounts:logout' %}" method="post" class="inline">
+          {% csrf_token %}<button type="submit" class="linkbtn">{% trans "Выход" %}</button>
+        </form>
+      {% else %}
+        <a href="{% url 'accounts:login' %}">{% trans "Вход" %}</a>
+      {% endif %}
+    </nav>
+    {# Language switch — Russian default, English fallback. #}
+    <form action="{% url 'set_language' %}" method="post" class="lang-switch">
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ request.path }}">
+      <button name="language" value="ru" {% if LANGUAGE_CODE == 'ru' %}class="active"{% endif %}>RU</button>
+      <button name="language" value="en" {% if LANGUAGE_CODE == 'en' %}class="active"{% endif %}>EN</button>
+    </form>
+  </div>
+</header>
+
+<main class="container">
+  {% if messages %}
+    <ul class="messages">
+      {% for m in messages %}<li class="msg {{ m.tags }}">{{ m }}</li>{% endfor %}
+    </ul>
+  {% endif %}
+  {% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <a href="{% url 'pages:personal_data' %}">{% trans "Персональные данные" %}</a> ·
+    <a href="{% url 'pages:offer' %}">{% trans "Публичная оферта" %}</a>
+    <p class="muted">© Кебзtore. {% trans "Все права защищены." %}</p>
+  </div>
+</footer>
+
+{# ── 152-ФЗ cookie consent banner (hidden once a choice is stored) ────────── #}
+{% if not request.COOKIES.cookie_consent %}
+<div id="consent" class="consent">
+  <p>{% trans "Мы используем файлы cookie. Технические — необходимы для работы сайта. Аналитические и рекламные — только с вашего согласия." %}
+     <a href="{% url 'pages:personal_data' %}">{% trans "Подробнее" %}</a>.</p>
+  <label><input type="checkbox" checked disabled> {% trans "Технические" %}</label>
+  <label><input type="checkbox" id="c-analytical"> {% trans "Аналитические" %}</label>
+  <label><input type="checkbox" id="c-advertising"> {% trans "Рекламные" %}</label>
+  <div class="consent-actions">
+    <button id="consent-accept-selected" class="btn-light">{% trans "Принять выбранные" %}</button>
+    <button id="consent-accept-all" class="btn">{% trans "Принять все" %}</button>
+  </div>
+</div>
+{% endif %}
+
+<script src="{% static 'js/main.js' %}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

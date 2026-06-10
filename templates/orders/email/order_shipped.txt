@@ -1,0 +1,14 @@
+Здравствуйте, {{ order.full_name }}!
+
+Ваш заказ №{{ order.id }} в магазине Кебзtore отправлен.
+{% if order.shipping_method %}
+Служба доставки: {{ order.shipping_method.name_ru }} (срок {{ order.shipping_method.eta_label }}).{% endif %}
+{% if order.tracking_number %}Трек-номер для отслеживания: {{ order.tracking_number }}{% endif %}
+
+Адрес доставки:
+{{ order.postal_code }}, {{ order.region }}, г. {{ order.city }}, ул. {{ order.street }}, д. {{ order.building }}{% if order.apartment %}, кв. {{ order.apartment }}{% endif %}
+
+Спасибо за покупку!
+
+С уважением,
+команда Кебзtore

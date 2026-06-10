@@ -1,0 +1,20 @@
+{% load humanize %}Здравствуйте, {{ order.full_name }}!
+
+Ваш заказ №{{ order.id }} в магазине Кебзtore оплачен. Спасибо за покупку!
+
+Состав заказа:
+{% for item in items %}- {{ item.title }} ({{ item.size }}) x {{ item.quantity }} — {{ item.line_total|floatformat:0|intcomma }} ₽
+{% endfor %}
+Товары: {{ order.items_total|floatformat:0|intcomma }} ₽
+{% if order.shipping_method %}Доставка ({{ order.shipping_method.name_ru }}): {{ order.shipping_cost|floatformat:0|intcomma }} ₽
+{% endif %}Итого: {{ order.grand_total|floatformat:0|intcomma }} ₽
+
+Адрес доставки:
+{{ order.postal_code }}, {{ order.region }}, г. {{ order.city }}, ул. {{ order.street }}, д. {{ order.building }}{% if order.apartment %}, кв. {{ order.apartment }}{% endif %}
+{% if order.tracking_number %}
+Трек-номер для отслеживания: {{ order.tracking_number }}{% endif %}
+
+Мы свяжемся с вами по телефону {{ order.phone }} при необходимости.
+
+С уважением,
+команда Кебзtore

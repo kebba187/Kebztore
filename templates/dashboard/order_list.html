@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load i18n humanize %}
+{% block title %}{% trans "Заказы" %} — Кебзtore{% endblock %}
+
+{% block content %}
+<h1 class="dash-title">{% trans "Панель управления" %}</h1>
+{% include "dashboard/_tabs.html" %}
+
+<div class="chart-panel">
+  {# Status filter #}
+  <form method="get" class="order-filter">
+    <label>{% trans "Статус" %}
+      <select name="status" onchange="this.form.submit()">
+        <option value="">{% trans "Все" %}</option>
+        {% for val, label in statuses %}
+          <option value="{{ val }}" {% if selected_status == val %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+      </select>
+    </label>
+  </form>
+
+  <table class="cart-table">
+    <thead><tr>
+      <th>№</th><th>{% trans "Дата" %}</th><th>{% trans "Покупатель" %}</th>
+      <th>{% trans "Статус" %}</th><th>{% trans "Сумма" %}</th>
+      <th>{% trans "Трек-номер" %}</th><th></th>
+    </tr></thead>
+    <tbody>
+    {% for o in orders %}
+      <tr>
+        <td>{{ o.id }}</td>
+        <td>{{ o.created_at|date:"d.m.Y H:i" }}</td>
+        <td>{{ o.full_name }}</td>
+        <td><span class="status-badge status-{{ o.status }}">{{ o.get_status_display }}</span></td>
+        <td>{{ o.grand_total|floatformat:0|intcomma }} ₽</td>
+        <td>{{ o.tracking_number|default:"—" }}</td>
+        <td><a href="{% url 'dashboard:order_manage' o.id %}">{% trans "Управление" %}</a></td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="7">{% trans "Заказов нет." %}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

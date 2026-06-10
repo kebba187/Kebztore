@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load i18n humanize %}
+{% block title %}{% trans "Заказ" %} №{{ order.id }} — Кебзtore{% endblock %}
+
+{% block content %}
+<h1 class="dash-title">{% trans "Панель управления" %}</h1>
+{% include "dashboard/_tabs.html" %}
+
+<div class="order-manage-layout">
+  {# ── Order summary ──────────────────────────────────────────────────────── #}
+  <div class="chart-panel">
+    <h2>{% trans "Заказ" %} №{{ order.id }}
+        <span class="status-badge status-{{ order.status }}">{{ order.get_status_display }}</span></h2>
+
+    <table class="cart-table">
+      <thead><tr><th>{% trans "Товар" %}</th><th>{% trans "Размер" %}</th>
+        <th>{% trans "Кол-во" %}</th><th>{% trans "Сумма" %}</th></tr></thead>
+      <tbody>
+      {% for item in order.items.all %}
+        <tr><td>{{ item.title }}</td><td>{{ item.size }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.line_total|floatformat:0|intcomma }} ₽</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    <p>{% trans "Доставка" %} ({{ order.shipping_method.name_ru }}): {{ order.shipping_cost|floatformat:0|intcomma }} ₽</p>
+    <p><strong>{% trans "Итого" %}: {{ order.grand_total|floatformat:0|intcomma }} ₽</strong></p>
+
+    <h3>{% trans "Покупатель и адрес" %}</h3>
+    <p class="muted">
+      {{ order.full_name }} · {{ order.phone }} · {{ order.email }}<br>
+      {{ order.postal_code }}, {{ order.region }}, г. {{ order.city }},
+      ул. {{ order.street }}, д. {{ order.building }}{% if order.apartment %}, кв. {{ order.apartment }}{% endif %}
+    </p>
+  </div>
+
+  {# ── Status + tracking form ─────────────────────────────────────────────── #}
+  <div class="product-form-card">
+    <h2 class="form-card-title">{% trans "Статус и доставка" %}</h2>
+    {% if form.errors %}
+      <div class="form-banner danger">
+        {% for field in form %}{% for e in field.errors %}<div>• {{ field.label }}: {{ e }}</div>{% endfor %}{% endfor %}
+      </div>
+    {% endif %}
+    <form method="post" class="dash-form">
+      {% csrf_token %}
+      {% for field in form %}
+        <label class="form-row">
+          <span>{{ field.label }}</span>
+          {{ field }}
+        </label>
+      {% endfor %}
+      <p class="muted">{% trans "При выборе «Отправлен» покупателю придёт письмо с трек-номером." %}</p>
+      <button type="submit" class="btn btn-block">{% trans "Сохранить" %}</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

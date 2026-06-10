@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load i18n humanize %}
+{% block title %}{% trans "Профиль" %} — Кебзtore{% endblock %}
+
+{% block content %}
+<h1>{% trans "Профиль" %}</h1>
+<p>{{ user.full_name|default:user.email }} · {{ user.email }}</p>
+
+<h2>{% trans "История заказов" %}</h2>
+{% if orders %}
+<table class="cart-table">
+  <thead><tr>
+    <th>№</th><th>{% trans "Дата" %}</th><th>{% trans "Статус" %}</th>
+    <th>{% trans "Сумма" %}</th><th>{% trans "Доставка / трек-номер" %}</th><th></th>
+  </tr></thead>
+  <tbody>
+  {% for o in orders %}
+    <tr>
+      <td>{{ o.id }}</td>
+      <td>{{ o.created_at|date:"d.m.Y" }}</td>
+      <td><span class="status-badge status-{{ o.status }}">{{ o.get_status_display }}</span></td>
+      <td>{{ o.grand_total|floatformat:0|intcomma }} ₽</td>
+      <td>
+        {% if o.tracking_number %}
+          {% if o.shipping_method %}{{ o.shipping_method.name_ru }}:<br>{% endif %}
+          <strong>{{ o.tracking_number }}</strong>
+        {% elif o.status == 'shipped' %}
+          {% trans "отправлен" %}
+        {% else %}
+          <span class="muted">—</span>
+        {% endif %}
+      </td>
+      <td><a href="{% url 'orders:detail' o.id %}">{% trans "Подробнее" %}</a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+  <p>{% trans "У вас пока нет заказов." %}</p>
+{% endif %}
+{% endblock %}

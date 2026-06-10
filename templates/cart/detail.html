@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load i18n humanize %}
+{% block title %}{% trans "Корзина" %} — Кебзtore{% endblock %}
+
+{% block content %}
+<h1>{% trans "Корзина" %}</h1>
+
+{% if cart.is_empty %}
+  <p>{% trans "Корзина пуста." %} <a href="{% url 'catalog:product_list' %}">{% trans "В каталог" %}</a></p>
+{% else %}
+<table class="cart-table">
+  <thead><tr>
+    <th>{% trans "Товар" %}</th><th>{% trans "Цена" %}</th>
+    <th>{% trans "Кол-во" %}</th><th>{% trans "Сумма" %}</th><th></th>
+  </tr></thead>
+  <tbody>
+  {% for item in cart %}
+    <tr data-id="{{ item.product.id }}">
+      <td><a href="{{ item.product.get_absolute_url }}">{{ item.product.title }}</a> <span class="muted">({{ item.product.size }})</span></td>
+      <td>{{ item.unit_price|floatformat:0|intcomma }} ₽</td>
+      <td>
+        <input type="number" class="cart-qty" value="{{ item.quantity }}" min="1" max="{{ item.product.stock }}">
+      </td>
+      <td class="line-total">{{ item.line_total|floatformat:0|intcomma }} ₽</td>
+      <td><button class="linkbtn cart-remove">{% trans "Удалить" %}</button></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<div class="cart-summary">
+  <p>{% trans "Товаров на сумму" %}: <strong id="cart-subtotal">{{ cart.subtotal|floatformat:0|intcomma }} ₽</strong></p>
+
+  <h3>{% trans "Ориентировочная доставка" %}</h3>
+  <ul class="ship-estimates">
+    {% for e in estimates %}
+      <li>{{ e.method.name }} ({{ e.method.eta_label }}):
+        {% if e.cost == 0 %}<strong>{% trans "бесплатно" %}</strong>{% else %}{{ e.cost|floatformat:0|intcomma }} ₽{% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+  <p class="muted">{% trans "Точная стоимость доставки рассчитывается на оформлении заказа." %}</p>
+
+  <a class="btn" href="{% url 'orders:checkout' %}">{% trans "Оформить заказ" %}</a>
+</div>
+{% endif %}
+{% endblock %}

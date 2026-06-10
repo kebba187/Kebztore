@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load i18n humanize %}
+{% block title %}Кебзtore — {% trans "футбольные джерси" %}{% endblock %}
+
+{% block content %}
+<section class="home-hero">
+  <h1>{% trans "Выберите категорию" %}</h1>
+  <p class="muted">{% trans "Оригинальные джерси клубов и национальных сборных" %}</p>
+</section>
+
+{# ── Two category cards: Club jerseys / Country jerseys ─────────────────── #}
+<div class="category-grid">
+  {% for card in cards %}
+    <a class="cat-card" href="{% url 'catalog:product_list' %}?category={{ card.key }}"
+       {% if card.image %}style="background-image:url('{{ card.image }}')"{% endif %}>
+      <div class="cat-overlay">
+        <h2>{{ card.title }}</h2>
+        <span>{{ card.subtitle }} →</span>
+      </div>
+    </a>
+  {% endfor %}
+</div>
+
+{# ── Featured products ─────────────────────────────────────────────────── #}
+<h2 class="section-title">{% trans "Популярное" %}</h2>
+<section class="product-grid">
+  {% for product in featured %}
+    <article class="card">
+      <a href="{{ product.get_absolute_url }}">
+        {% if product.main_image %}
+          <img src="{{ product.main_image }}" alt="{{ product.title }}">
+        {% else %}<div class="noimg">{% trans "Нет фото" %}</div>{% endif %}
+        <h3>{{ product.title }}</h3>
+      </a>
+      <p class="muted">{% if product.origin %}{{ product.origin }} · {% endif %}{{ product.season }} · {{ product.size }}</p>
+      <p class="price">{{ product.price|floatformat:0|intcomma }} ₽</p>
+      {% if product.in_stock %}
+        <button class="btn add-to-cart" data-id="{{ product.id }}">{% trans "В корзину" %}</button>
+      {% else %}
+        <span class="muted">{% trans "Нет в наличии" %}</span>
+      {% endif %}
+    </article>
+  {% empty %}
+    <p>{% trans "Товары скоро появятся." %}</p>
+  {% endfor %}
+</section>
+{% endblock %}

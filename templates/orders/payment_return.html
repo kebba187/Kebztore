@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Оплата" %} — Кебзtore{% endblock %}
+
+{% block content %}
+<div class="centered-card">
+  <h1>{% trans "Спасибо за заказ!" %}</h1>
+  {% if order %}
+    <p>{% blocktrans with id=order.id %}Заказ №{{ id }} принят.{% endblocktrans %}
+       {% trans "Статус оплаты обновится автоматически после подтверждения банком." %}</p>
+    <a class="btn" href="{% url 'orders:detail' order.id %}">{% trans "Детали заказа" %}</a>
+  {% else %}
+    <p>{% trans "Заказ обрабатывается." %}</p>
+  {% endif %}
+  <a href="{% url 'catalog:product_list' %}">{% trans "Вернуться в каталог" %}</a>
+</div>
+{% endblock %}

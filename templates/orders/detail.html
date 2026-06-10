@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load i18n humanize %}
+{% block title %}{% trans "Заказ" %} №{{ order.id }} — Кебзtore{% endblock %}
+
+{% block content %}
+<h1>{% trans "Заказ" %} №{{ order.id }}</h1>
+<p><strong>{% trans "Статус" %}:</strong> {{ order.get_status_display }}</p>
+
+<table class="cart-table">
+  <thead><tr><th>{% trans "Товар" %}</th><th>{% trans "Размер" %}</th><th>{% trans "Цена" %}</th><th>{% trans "Кол-во" %}</th><th>{% trans "Сумма" %}</th></tr></thead>
+  <tbody>
+  {% for item in order.items.all %}
+    <tr><td>{{ item.title }}</td><td>{{ item.size }}</td>
+        <td>{{ item.unit_price|floatformat:0|intcomma }} ₽</td><td>{{ item.quantity }}</td>
+        <td>{{ item.line_total|floatformat:0|intcomma }} ₽</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<div class="order-totals">
+  <p>{% trans "Товары" %}: {{ order.items_total|floatformat:0|intcomma }} ₽</p>
+  <p>{% trans "Доставка" %} ({{ order.shipping_method.name }}, {{ order.shipping_method.eta_label }}): {{ order.shipping_cost|floatformat:0|intcomma }} ₽</p>
+  <p><strong>{% trans "Итого" %}: {{ order.grand_total|floatformat:0|intcomma }} ₽</strong></p>
+</div>
+
+<h2>{% trans "Доставка" %}</h2>
+<p>{{ order.full_name }}, {{ order.phone }}<br>
+   {{ order.postal_code }}, {{ order.region }}, {{ order.city }},<br>
+   {% trans "ул." %} {{ order.street }}, {% trans "д." %} {{ order.building }}{% if order.apartment %}, {% trans "кв." %} {{ order.apartment }}{% endif %}</p>
+{% if order.tracking_number %}
+  <p><strong>{% trans "Трек-номер" %}:</strong> {{ order.tracking_number }}</p>
+{% endif %}
+{% endblock %}
